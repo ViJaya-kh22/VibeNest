@@ -81,28 +81,27 @@ const AlbumDetail = () => {
     <div className="h-full overflow-y-auto pb-24 bg-zinc-950">
 
       {/* Hero */}
-      <div className="relative h-64 md:h-72">
-        {/* Blurred bg */}
-        {album.coverImg && (
-          <img
-            src={album.coverImg}
-            alt={album.title}
-            className="h-full w-full object-cover absolute inset-0 opacity-40 blur-sm scale-105"
-          />
-        )}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-zinc-950/60 to-zinc-950" />
+      <div className="relative">
+        <div className="h-56 w-full bg-gradient-to-b from-violet-900/60 to-zinc-950">
+          {album.coverImg && (
+            <img
+              src={album.coverImg}
+              alt={album.title}
+              className="h-full w-full object-cover opacity-30 absolute inset-0"
+            />
+          )}
+        </div>
 
-        {/* Back button */}
         <button
           onClick={() => navigate(-1)}
-          className="absolute top-4 left-4 flex items-center gap-2 text-sm text-white bg-black/50 px-3 py-1.5 rounded-full hover:bg-black/70 transition z-10"
+          className="absolute top-4 left-4 flex items-center gap-2 text-sm text-white bg-black/40 px-3 py-1.5 rounded-full hover:bg-black/60 transition"
         >
           <ArrowLeft size={14} /> Back
         </button>
 
         {/* Album info */}
-        <div className="absolute bottom-0 left-0 px-5 pb-5 flex items-end gap-4 z-10 w-full">
-          <div className="h-24 w-24 md:h-28 md:w-28 rounded-xl overflow-hidden bg-zinc-800 shrink-0 shadow-2xl ring-1 ring-white/10">
+        <div className="absolute bottom-0 left-0 px-6 pb-6 flex items-end gap-5">
+          <div className="h-28 w-28 rounded-xl overflow-hidden bg-zinc-800 shrink-0 shadow-xl">
             {album.coverImg ? (
               <img src={album.coverImg} alt={album.title} className="h-full w-full object-cover" />
             ) : (
@@ -111,9 +110,9 @@ const AlbumDetail = () => {
               </div>
             )}
           </div>
-          <div className="pb-1 min-w-0">
+          <div className="pb-1">
             <p className="text-xs text-zinc-400 uppercase tracking-widest mb-1">Album</p>
-            <h1 className="text-2xl md:text-3xl font-bold truncate">{album.title}</h1>
+            <h1 className="text-3xl font-bold">{album.title}</h1>
             <p className="text-sm text-zinc-400 mt-1">
               {album.genere} · {album.music?.length || 0} songs
             </p>
