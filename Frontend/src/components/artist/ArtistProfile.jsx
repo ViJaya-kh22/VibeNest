@@ -7,14 +7,12 @@ import MySongsList from "./MySongsList";
 import MyAlbumList from "./MyAlbumList";
 import api from "../utils/axiosInstance";
 
-
 const ArtistProfile = () => {
   const { user } = useAuth();
   const [tab, setTab] = useState("song");
   const [mySongs, setMySongs] = useState([]);
   const [myAlbums, setMyAlbums] = useState([]);
   const [toast, setToast] = useState(null);
-
 
   const fetchSongs = async () => {
     try {
@@ -28,12 +26,11 @@ const ArtistProfile = () => {
   const fetchAlbums = async () => {
     try {
       const albumsdata = await api.get(`/music/my-albums`);
-      setMyAlbums(albumsdata.data.albums)
-
+      setMyAlbums(albumsdata.data.albums);
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   useEffect(() => { fetchSongs(); fetchAlbums(); }, []);
 
@@ -47,12 +44,16 @@ const ArtistProfile = () => {
   const initials = user?.username?.split(" ").map(w => w[0]).join("").toUpperCase().slice(0, 2);
 
   return (
-    <div className="h-full overflow-y-auto pb-24 px-6 py-6 bg-zinc-950">
-      {toast && <div className="fixed top-24 right-16 z-50 bg-green-600 text-white px-5 py-3 rounded-2xl text-sm font-semibold">{toast}</div>}
+    <div className="h-full overflow-y-auto pb-24 px-4 md:px-6 py-6 bg-zinc-950">
+      {toast && (
+        <div className="fixed top-20 right-4 z-50 bg-green-600 text-white px-5 py-3 rounded-2xl text-sm font-semibold shadow-lg">
+          {toast}
+        </div>
+      )}
 
       {/* Header */}
-      <div className="flex items-center gap-5 mb-8">
-        <div className="h-12 w-12 md:h-20 md:w-20 rounded-full bg-gradient-to-br from-green-500 to-emerald-700 flex items-center justify-center text-base md:text-2xl font-bold shrink-0">
+      <div className="flex items-center gap-4 mb-8">
+        <div className="h-14 w-14 md:h-20 md:w-20 rounded-full bg-gradient-to-br from-green-500 to-emerald-700 flex items-center justify-center text-lg md:text-2xl font-bold shrink-0">
           {initials}
         </div>
         <div>
@@ -63,28 +64,40 @@ const ArtistProfile = () => {
             </span>
           </div>
           <p className="text-zinc-400 text-sm mt-1">{user?.email}</p>
-          <p className="text-sm text-zinc-400 mt-2">
-            <span className="text-white font-bold">{mySongs.length}</span> Songs
-            <span className="text-white font-bold pl-1">{myAlbums.length}</span> Ablums
+          <p className="text-sm text-zinc-400 mt-1">
+            <span className="text-white font-bold">{mySongs.length}</span> Songs &nbsp;
+            <span className="text-white font-bold">{myAlbums.length}</span> Albums
           </p>
         </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Upload panel */}
-        <div className="bg-zinc-900 rounded-2xl p-6 border border-zinc-800">
+        <div className="bg-zinc-900 rounded-2xl p-5 border border-zinc-800">
+          {/* Tab switcher — icon + short label, no wrapping */}
           <div className="flex bg-zinc-800 rounded-xl p-1 mb-6">
-            {[{ key: "song", label: "Upload Song", icon: <Music size={14} /> },
-            { key: "album", label: "Create Album", icon: <Disc3 size={14} /> }
+            {[
+              { key: "song", label: "Upload Song", icon: <Music size={14} /> },
+              { key: "album", label: "Create Album", icon: <Disc3 size={14} /> },
             ].map(t => (
-              <button key={t.key} onClick={() => setTab(t.key)}
-                className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-lg text-sm font-semibold transition ${tab === t.key ? "bg-white text-black" : "text-zinc-400 hover:text-white"}`}>
-                {t.icon} {t.label}
+              <button
+                key={t.key}
+                onClick={() => setTab(t.key)}
+                className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg text-sm font-semibold transition whitespace-nowrap
+                  ${tab === t.key ? "bg-white text-black" : "text-zinc-400 hover:text-white"}`}
+              >
+                {t.icon}
+                <span className="hidden xs:inline sm:inline">{t.label}</span>
+                {/* Fallback short label on very small screens */}
+                <span className="inline xs:hidden sm:hidden">
+                  {t.key === "song" ? "Song" : "Album"}
+                </span>
               </button>
             ))}
           </div>
+
           {tab === "song"
-            ? <UploadSongForm onSuccess={(msg) => { setToast(msg); fetchSongs(); }}  className="mr-1"/>
+            ? <UploadSongForm onSuccess={(msg) => { setToast(msg); fetchSongs(); }} />
             : <UploadAlbumForm songs={mySongs} onSuccess={(msg) => { setToast(msg); fetchAlbums(); }} />
           }
         </div>

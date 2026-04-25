@@ -1,7 +1,6 @@
 import { useState, useRef } from "react";
 import api from "../utils/axiosInstance";
-import { Music, Upload, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
-
+import { Music, Upload, AlertCircle, Loader2 } from "lucide-react";
 
 const Field = ({ label, ...props }) => (
   <div className="flex flex-col gap-1">
@@ -70,28 +69,32 @@ const UploadSongForm = ({ onSuccess }) => {
         onChange={(e) => setForm({ ...form, genere: e.target.value })}
       />
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-3">
+        {/* Audio */}
         <div>
           <input ref={audioRef} type="file" accept="audio/*" className="hidden"
             onChange={(e) => setAudioFile(e.target.files[0])} />
-          <button onClick={() => audioRef.current.click()}
-            className={`w-full flex items-center justify-center gap-2 py-3 rounded-xl border-2 border-dashed text-sm font-semibold transition ${
-              audioFile ? "border-green-500 text-green-400" : "border-zinc-600 text-zinc-400 hover:border-zinc-400"
-            }`}>
-            <Music size={16} className="pl-1"/>
-            {audioFile ? audioFile.name.slice(0, 18) + "…" : "Select Audio"}
+          <button
+            onClick={() => audioRef.current.click()}
+            className={`w-full flex flex-col items-center justify-center gap-1.5 py-4 rounded-xl border-2 border-dashed text-xs font-semibold transition
+              ${audioFile ? "border-green-500 text-green-400" : "border-zinc-600 text-zinc-400 hover:border-zinc-400"}`}
+          >
+            <Music size={18} />
+            <span>{audioFile ? audioFile.name.slice(0, 12) + "…" : "Select Audio"}</span>
           </button>
         </div>
 
+        {/* Cover */}
         <div>
           <input ref={coverRef} type="file" accept="image/*" className="hidden"
             onChange={(e) => setCoverFile(e.target.files[0])} />
-          <button onClick={() => coverRef.current.click()}
-            className={`w-full flex items-center justify-center gap-2 py-3 rounded-xl border-2 border-dashed text-sm font-semibold transition ${
-              coverFile ? "border-green-500 text-green-400" : "border-zinc-600 text-zinc-400 hover:border-zinc-400"
-            }`}>
-            <Upload size={16} className="pl-1" />
-            {coverFile ? "Cover Selected ✓" : "Cover Art (opt)"}
+          <button
+            onClick={() => coverRef.current.click()}
+            className={`w-full flex flex-col items-center justify-center gap-1.5 py-4 rounded-xl border-2 border-dashed text-xs font-semibold transition
+              ${coverFile ? "border-green-500 text-green-400" : "border-zinc-600 text-zinc-400 hover:border-zinc-400"}`}
+          >
+            <Upload size={18} />
+            <span>{coverFile ? "Cover Selected ✓" : "Cover Art (opt)"}</span>
           </button>
         </div>
       </div>
