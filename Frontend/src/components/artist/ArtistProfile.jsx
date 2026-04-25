@@ -84,7 +84,7 @@ const ArtistProfile = () => {
             ))}
           </div>
           {tab === "song"
-            ? <UploadSongForm onSuccess={(msg) => { setToast(msg); fetchSongs(); }} />
+            ? <UploadSongForm onSuccess={(msg) => { setToast(msg); fetchSongs(); }}  className="mr-1"/>
             : <UploadAlbumForm songs={mySongs} onSuccess={(msg) => { setToast(msg); fetchAlbums(); }} />
           }
         </div>

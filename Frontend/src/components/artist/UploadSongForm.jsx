@@ -78,7 +78,7 @@ const UploadSongForm = ({ onSuccess }) => {
             className={`w-full flex items-center justify-center gap-2 py-3 rounded-xl border-2 border-dashed text-sm font-semibold transition ${
               audioFile ? "border-green-500 text-green-400" : "border-zinc-600 text-zinc-400 hover:border-zinc-400"
             }`}>
-            <Music size={16} />
+            <Music size={16} className="pl-1"/>
             {audioFile ? audioFile.name.slice(0, 18) + "…" : "Select Audio"}
           </button>
         </div>
@@ -90,7 +90,7 @@ const UploadSongForm = ({ onSuccess }) => {
             className={`w-full flex items-center justify-center gap-2 py-3 rounded-xl border-2 border-dashed text-sm font-semibold transition ${
               coverFile ? "border-green-500 text-green-400" : "border-zinc-600 text-zinc-400 hover:border-zinc-400"
             }`}>
-            <Upload size={16} />
+            <Upload size={16} className="pl-1" />
             {coverFile ? "Cover Selected ✓" : "Cover Art (opt)"}
           </button>
         </div>
