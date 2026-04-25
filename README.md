@@ -2,7 +2,7 @@
 
 A full-stack music streaming web app where artists upload their music and listeners discover it. Think SoundCloud-style — no Spotify API, everything is self-hosted via Cloudinary.
 
-**Live Demo:** [your-vercel-url.vercel.app](https://your-vercel-url.vercel.app) &nbsp;|&nbsp; **Backend:** [your-render-url.onrender.com](https://your-render-url.onrender.com)
+**Live Demo:** [vibe-nest-ivory.vercel.app](https://vibe-nest-ivory.vercel.app) &nbsp;|&nbsp; **Backend:** [vibenest-3q18.onrender.com](https://vibenest-3q18.onrender.com)
 
 ---
 
@@ -42,19 +42,34 @@ A full-stack music streaming web app where artists upload their music and listen
 
 ```
 vibenest/
-├── backend/
-│   ├── controllers/
-│   ├── middleware/
-│   ├── models/
-│   ├── routes/
-│   └── server.js
-├── frontend/
-│   ├── public/
+├── Backend/
+│   ├── server.js
+│   └── src/
+│       ├── controllers/
+│       ├── db/
+│       ├── middleware/
+│       ├── models/
+│       ├── routes/
+│       ├── services/
+│       ├── validations/
+│       └── app.js
+├── Frontend/
+│   ├── index.html
+│   ├── vite.config.js
 │   └── src/
 │       ├── components/
-│       ├── pages/
-│       ├── context/
+│       │   ├── artist/
+│       │   ├── context/
+│       │   ├── pages/
+│       │   ├── shared/
+│       │   ├── user/
+│       │   └── utils/
+│       ├── App.jsx
+│       ├── index.css
 │       └── main.jsx
+├── screenshots/
+├── .gitignore
+└── README.md
 ```
 
 ---
@@ -131,4 +146,4 @@ npm run dev
 
 **Vijaya** — Self-taught MERN stack developer
 
-[GitHub](https://github.com/your-username) · [LinkedIn](https://linkedin.com/in/your-username)
+[GitHub](https://github.com/ViJaya-kh22) · [LinkedIn](https://www.linkedin.com/in/vijaya-khavnekar-711a45369/)
