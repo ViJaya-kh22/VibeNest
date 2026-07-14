@@ -6,7 +6,9 @@ import { useAuth } from "../context/AuthContext";
 
 const Signup = () => {
   const navigate = useNavigate();
-  const {login} = useAuth();
+  const {login, loading ,setLoading} = useAuth();
+
+
 
   const [form, setForm] = useState({
     username: "",
@@ -21,6 +23,7 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true)
     try {
       const res = await api.post("/auth/register", form);
        
@@ -32,6 +35,8 @@ const Signup = () => {
 
     } catch (err) {
       console.log(err);
+    }finally{
+      setLoading(false)
     }
   };
 
@@ -56,7 +61,7 @@ const Signup = () => {
 
 
           <div className="flex flex-col gap-1.5">
-            <label className="text-[11px] uppercase tracking-widest text-zinc-500 font-medium" >
+            <label htmlFor="username" className="text-[11px] uppercase tracking-widest text-zinc-500 font-medium" >
               Username
             </label>
             <input
@@ -68,7 +73,7 @@ const Signup = () => {
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label className="text-[11px] uppercase tracking-widest text-zinc-500 font-medium" >
+            <label htmlFor="email" className="text-[11px] uppercase tracking-widest text-zinc-500 font-medium" >
               Email
             </label>
             <input
@@ -81,7 +86,7 @@ const Signup = () => {
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label className="text-[11px] uppercase tracking-widest text-zinc-500 font-medium" >
+            <label htmlFor="password" className="text-[11px] uppercase tracking-widest text-zinc-500 font-medium" >
               Password
             </label>
             <input
@@ -120,7 +125,7 @@ const Signup = () => {
             type="submit"
             className="mt-1 w-full bg-violet-600 hover:bg-violet-500 text-white rounded-lg py-3 text-sm font-medium transition-colors"
           >
-            Create account
+           {loading ? "Creating account..." : "Create account"}
           </button>
         </form>
 

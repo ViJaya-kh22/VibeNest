@@ -59,7 +59,7 @@ const Login = () => {
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
 
           <div className="flex flex-col gap-1.5">
-            <label className="text-[11px] uppercase tracking-widest text-zinc-500 font-medium">
+            <label htmlFor="email" className="text-[11px] uppercase tracking-widest text-zinc-500 font-medium">
               Email
             </label>
             <input
@@ -74,7 +74,7 @@ const Login = () => {
 
           <div className="flex flex-col gap-1.5">
             <div className="flex justify-between items-center">
-              <label className="text-[11px] uppercase tracking-widest text-zinc-500 font-medium">
+              <label htmlFor="password" className="text-[11px] uppercase tracking-widest text-zinc-500 font-medium">
                 Password
               </label>
 
